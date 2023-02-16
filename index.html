@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="./script.js"></script>
+    <title>Frontend Mentor | Interactive rating component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @media (max-width: 90em) {
+        body {
+          padding: 0 5rem;
+        }
+      }
+      @media (max-width: 23.44rem) {
+        body {
+          padding: 0 5rem;
+        }
+        .container {
+          max-width: 30rem;
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        font-size: 1.5rem;
+        background-color: hsl(216, 12%, 8%);
+        font-family: Overpass;
+        font-weight: 400;
+        color: hsl(0, 0%, 52%);
+      }
+      .feedback {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        max-width: 40rem;
+        padding: 3rem;
+        background-color: hsl(207, 27%, 13%);
+        border-radius: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .container-card {
+        margin: 0 auto;
+        max-width: 40rem;
+        padding: 3rem;
+        background-color: hsl(207, 27%, 13%);
+        border-radius: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 2.5rem;
+      }
+      .star-header {
+        height: 4rem;
+        width: 4rem;
+        background-color: hsl(218, 10%, 21%);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .title {
+        color: hsl(0, 1%, 86%);
+        font-weight: 400;
+        font-size: 2.5rem;
+      }
+      .hidden {
+        display: none;
+      }
+      .rates {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        margin-bottom: 3rem;
+      }
+      input[type="radio"] {
+        display: none;
+        border-radius: 50%;
+      }
+      .numbers {
+        height: 5rem;
+        width: 5rem;
+        background-color: hsl(218, 10%, 21%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+      input:checked + label {
+        background: hsl(25, 97%, 53%);
+        color: hsl(0, 1%, 86%);
+      }
+      #selected {
+        background: hsl(25, 97%, 53%);
+        color: hsl(0, 1%, 86%);
+      }
+      .numbers:hover {
+        background: hsl(216, 12%, 54%);
+        color: hsl(0, 1%, 86%);
+      }
+      .submit-btn {
+        padding: 1.4rem;
+        color: hsl(0, 1%, 86%);
+        background-color: hsl(25, 97%, 53%);
+        border-radius: 2rem;
+        border: none;
+        text-transform: uppercase;
+        font-weight: 400;
+        letter-spacing: 2px;
+        width: 100%;
+      }
+      .submit-btn:hover {
+        background-color: hsl(0, 0%, 100%);
+        color: hsl(25, 97%, 53%);
+        cursor: pointer;
+      }
+      .rate-show {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        padding: 0.5rem 1.5rem;
+        background-color: hsl(218, 10%, 21%);
+        border-radius: 1.2rem;
+        font-weight: 400;
+        color: hsl(25, 86%, 45%);
+      }
+      .thankyou-card {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .thankyou {
+        font-size: 3rem;
+        font-weight: 700;
+        color: rgb(220, 227, 233);
+      }
+      .tips {
+        line-height: 1.8;
+        text-align: center;
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Rating state start -->
+
+    <main class="feedback">
+      <div class="container">
+        <header class="star-header">
+          <svg
+            class="star"
+            width="17"
+            height="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m9.067.43 1.99 4.031c.112.228.33.386.58.422l4.45.647a.772.772 0 0 1 .427 1.316l-3.22 3.138a.773.773 0 0 0-.222.683l.76 4.431a.772.772 0 0 1-1.12.813l-3.98-2.092a.773.773 0 0 0-.718 0l-3.98 2.092a.772.772 0 0 1-1.119-.813l.76-4.431a.77.77 0 0 0-.222-.683L.233 6.846A.772.772 0 0 1 .661 5.53l4.449-.647a.772.772 0 0 0 .58-.422L7.68.43a.774.774 0 0 1 1.387 0Z"
+              fill="#FC7614"
+            />
+          </svg>
+        </header>
+        <h1 class="title">How did we do?</h1>
+        <p class="description">
+          Please let us know how we did with your support request. All feedback
+          is appreciated to help us improve our offering!
+        </p>
+        <form class="rates-form" action="index.html" method="post">
+          <div class="rates">
+            <input type="radio" name="rate" id="rate1" value="1" />
+            <label for="rate1" class="numbers"><span>1</span></label>
+            <input type="radio" name="rate" id="rate2" value="2" />
+            <label for="rate2" class="numbers"><span>2</span></label>
+            <input type="radio" name="rate" id="rate3" value="3" />
+            <label for="rate3" class="numbers"><span>3</span></label>
+            <input type="radio" name="rate" id="rate4" value="4" />
+            <label for="rate4" class="numbers"><span>4</span></label>
+            <input type="radio" name="rate" id="rate5" value="5" />
+            <label for="rate5" class="numbers"><span>5</span></label>
+          </div>
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </main>
+    <!-- Rating state end -->
+
+    <!-- Thank you state start -->
+    <section class="thankyou-card hidden">
+      <div class="container-card">
+        <div class="card-icon">
+          <img src="./images/illustration-thank-you.svg" alt="thank you" />
+        </div>
+        <h2 class="rate-show">
+          You selected &nbsp;<span class="rate-number">1</span>&nbsp; out of 5
+        </h2>
+        <p class="thankyou">Thank you!</p>
+        <p class="tips">
+          We appreciate you taking the time to give a rating. If you ever need
+          more support, don’t hesitate to get in touch!
+        </p>
+      </div>
+    </section>
+
+    <!-- Add rating here -->
+
+    <!-- Thank you state end -->
+
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Tian</a>.
+    </footer>
+  </body>
+</html>
